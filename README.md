@@ -1,6 +1,12 @@
 # html-demo-element
 inserts [prism JS syntax colored](https://prismjs.com/) HTML in demo-element before actual dom
 
+[![npm package](https://nodei.co/npm/html-demo-element.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/html-demo-element/)
+
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/owner/my-element)
+
+Dependent prism script located on unpkg.com CDN.
+
 ## Sample
 The code
 ```html
