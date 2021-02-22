@@ -1,4 +1,4 @@
-# demo-element
+# html-demo-element
 inserts [prism JS syntax colored](https://prismjs.com/) HTML in demo-element before actual dom
 
 ## Sample
@@ -18,7 +18,7 @@ The code
 renders following content:
 ![screenshot](screenshot.png?raw=true "Title")
 
-# Use 
+# Use
 Include the script BEFORE inner content is modified. I.e. immediately after HTML and before scripts with components.
 
 # Live demo
