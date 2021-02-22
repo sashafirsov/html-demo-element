@@ -4,7 +4,7 @@ import "https://unpkg.com/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min
 
 var styles = `
     @import "https://unpkg.com/prismjs@1.23.0/themes/prism.css";
-    demo-section{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; padding: 1rem; margin: 1rem; }
+    html-demo-element{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; padding: 1rem; margin: 1rem; }
 `
 
 const styleSheet = document.createElement("style")
@@ -12,10 +12,10 @@ styleSheet.type = "text/css"
 styleSheet.innerText = styles
 document.head.appendChild(styleSheet);
 
-for( let el of document.querySelectorAll('demo-section') )
+for( let el of document.querySelectorAll('html-demo-element') )
     el.initialHTML = el.innerHTML;
 
-class
+    class
 HtmlDemoElement extends HTMLElement
 {
     connectedCallback()
