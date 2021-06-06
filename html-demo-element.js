@@ -20,7 +20,7 @@ HtmlDemoElement extends HTMLElement
 {
     connectedCallback()
     {   const      $ = x => this.querySelector(x)
-        ,   replaceDom = ( parent, child ) => { parent.innerHTML = ''; parent.append(child); }
+        , replaceDom = ( parent, child ) => { parent.innerHTML = ''; parent.append(child); }
         ,   template = $('[slot="source"]') || $('template')
         ,    srcText = template ? template.innerHTML :  this.initialHTML;
 
@@ -29,13 +29,13 @@ HtmlDemoElement extends HTMLElement
         pre.innerHTML = `<h3>${this.title||''}</h3><pre><code class="language-markup" >${html}</code></pre>`;
         if( template )
         {
-            const textSlot = $('[slot="text"]');
+            const textSlot = $('[slot="text"]')
+            ,          ref = template.nextElementSibling || template.parentElement.lastElementChild;
             if( textSlot )
                 replaceDom( textSlot, pre );
             else
-            {   const ref = template.nextElementSibling || template.parentElement.lastElementChild;
                 template.parentElement.insertBefore( pre, ref );
-            }
+
             const demoDom = template.content.cloneNode( true )
             ,        demo = $('[slot="demo"]')
             if( demo )
