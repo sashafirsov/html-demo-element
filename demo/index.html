@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html-demo-element demo</title>
+    <script type="module" src="../html-demo-element.js"></script>
+    <script type="module" src="https://unpkg.com/slotted-element@1.0.2/slotted-element.js"></script>
+    <style>
+        slotted-element{ box-shadow: inset 0 0 2em #000000; }
+        slotted-element {
+            display: block;
+            background-color: rgba(255,255,255,0.8);
+            box-shadow: inset 0 0 2em #000000;
+        }
+    </style>
+</head>
+<body>
+<h1> html-demo-element demo </h1>
+<p> Developer's documentation reside in <a href="https://github.com/sashafirsov/html-demo-element">Git repo</a>. </p>
+<p> View this page <a href="https://github.com/sashafirsov/html-demo-element/demo/index.html"> source </a> </p>
+<h2>in body</h2>
+
+<html-demo-element>
+<style>
+    .heart {
+        animation: heart-beat 1.2s infinite ease-in-out;
+        text-align: center; font-size: 400%;
+    }
+    @keyframes heart-beat
+    {   0%  {transform: scale(1);}     40% {transform: scale(0.6);}
+        60%  {transform: scale(0.9);} 100% {transform: scale(0.7);}
+    }
+</style>
+<div class="heart">💖</div>
+</html-demo-element>
+
+<h2> With title attribute </h2>
+
+<html-demo-element title="title attribute 🤗">
+    <html-demo-element title="with title attribute 🤗">
+        Eating own dog food 🦴
+    </html-demo-element>
+</html-demo-element>
+
+<h2> Template as body </h2>
+
+<html-demo-element>
+    <fieldset>
+        <legend>When template is presented, only its body will be shown as source</legend>
+        <template><i>Candle 🕯️</i></template>
+        <p>This way you could decorate sources. The sources shown after template and live DOM beneath </p>
+    </fieldset>
+</html-demo-element>
+
+<h2> Slots: source, demo, text </h2>
+
+<html-demo-element>
+    <template>ignored</template>
+    <template slot="source"> <i>Croissant 🥐️ </i></template>
+    <p><code>slot="source"</code> defines where to get code     </p>
+
+    <p><code>slot="demo"  </code> inject the html from source:  </p>
+    <div slot="demo"> replaced with tasty demo </div>
+
+    <p><code>slot="text"  </code> inject colored code text:     </p>
+    <div slot="text"> replaced with colored code </div>
+
+</html-demo-element>
+
+<p>Happy coding!</p>
+</body>
+</html>
