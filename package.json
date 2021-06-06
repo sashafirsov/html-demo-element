@@ -1,20 +1,27 @@
 {
-  "name": "html-demo-element",
-  "version": "1.0.1",
-  "description": "Webcomponent inserts prism JS syntax colored HTML in demo-element before actual dom",
-  "author": "Sasha Firsov",
-  "license": "Apache-2.0",
-  "main": "demo-element.js",
-  "module": "demo-element.js",
-  "type": "module",
+    "name": "html-demo-element",
+    "version": "1.0.2",
+    "description": "Webcomponent inserts prism JS syntax colored HTML in html-demo-element before actual dom",
+    "author": "Sasha Firsov",
+    "license": "Apache-2.0",
+    "main": "demo-element.js",
+    "module": "demo-element.js",
+    "type": "module",
     "repository": {
         "type": "git",
         "url": "https://github.com/sashafirsov/html-demo-element.git"
     },
-  "scripts": {
-  },
-  "dependencies": {
-  },
-  "devDependencies": {
-  }
+    "keywords": [
+        "Web Component",
+        "HTML",
+        "prism",
+        "highlight",
+        "Source View"
+    ],
+    "scripts": {
+    },
+    "dependencies": {
+    },
+    "devDependencies": {
+    }
 }
