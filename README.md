@@ -68,6 +68,6 @@ When you want to control where the source is located and where to render the cod
 
 ## Properties and attributes
 * `source` - the source code text. If the attribute is not defined, it would be initialized from `source` slot ^^
-* `type` - one of (prism js  supported languages)[https://prismjs.com/#supported-languages]. 
+* `type` - one of [prism js  supported languages](https://prismjs.com/#supported-languages). 
   `html`, `css`, `js` imported by default. When omitted, assumed `html`.
 * `legend` - optional heading for `html-demo-element`  
