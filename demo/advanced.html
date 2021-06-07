@@ -2,37 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>html-demo-element demo</title>
+    <title>html-demo-element advanced use </title>
     <script type="module" src="../html-demo-element.js"></script>
 </head>
 <body>
-<h1> html-demo-element demo </h1>
+<h1> html-demo-element advanced use </h1>
 <p> Developer's documentation reside in <a href="https://github.com/sashafirsov/html-demo-element">Git repo</a>. </p>
 <p> View this page <a href="https://github.com/sashafirsov/html-demo-element/demo/index.html"> source </a> </p>
-<h2>Change attributes source, demo, text </h2>
+<p> Programmatic change <code>source</code>, <code>demo</code>, <code>text</code> property or attribute from text or
+    DOM subtree.
+    Click on button to see this demo CSS, JS, or HTML code highlighted by <a href="https://prismjs.com/">PrismJs</a>.
+</p>
 
 
-<style id="demo_css">
+<style id="sample_css">
     button{ padding: 1rem; border-radius: 0.5rem; }
+    button:focus{ background-color: aquamarine; }
+    fieldset
+    {   display: inline-flex; border-top-left-radius: 1rem;
+        border: none; box-shadow: -4px 2px 4px silver;
+    }
 </style>
-<script id="demo_js">
+<script id="sample_js">
 function setSourceAttribute( cssJsHtml )
 {
-    demoElement.type = demoElement.title = cssJsHtml;
-    demoElement.setAttribute('source', window['demo_'+cssJsHtml].innerHTML );
+    demoElement.type = cssJsHtml;
+    demoElement.setAttribute('source', window[ 'sample_'+cssJsHtml ].innerHTML );
+}
+function setSourceProp( cssJsHtml )
+{
+    demoElement.type = cssJsHtml;
+    demoElement.source = window[ 'sample_'+cssJsHtml ].innerHTML;
+}
+function setSourceByNode( cssJsHtml )
+{
+    demoElement.type = cssJsHtml;
+    demoElement.source = window[ 'sample_'+cssJsHtml ];
 }
 </script>
 
 <html-demo-element id="demoElement">
-    <template id="demo_html">
-        <button onclick="demoElement.source=demo_css"             > demoElement.source= css node </button>
-        <button onclick="demoElement.source=demo_css.textContent" > demoElement.source= css text </button>
-        <fieldset>
-            <legend> set source attribute from text of </legend>
-            <button onclick="setSourceAttribute( 'css' )"           > css   </button>
-            <button onclick="setSourceAttribute( 'js'  )"           > js    </button>
-            <button onclick="setSourceAttribute( 'html'  )"         > html  </button>
-        </fieldset>
+    <template id="sample_html">
+
+<fieldset>
+    <legend> demoElement.source = node </legend>
+    <button onclick="setSourceByNode( 'css' )" > css   </button>
+    <button onclick="setSourceByNode( 'js'  )" > js    </button>
+    <button onclick="setSourceByNode( 'html')" > html  </button>
+</fieldset>
+<fieldset>
+    <legend> demoElement.source = text of </legend>
+    <button onclick="setSourceProp( 'css' )" > css   </button>
+    <button onclick="setSourceProp( 'js'  )" > js    </button>
+    <button onclick="setSourceProp( 'html')" > html  </button>
+</fieldset>
+<fieldset>
+    <legend> set source attribute from text of </legend>
+    <button onclick="setSourceAttribute( 'css' )" > css   </button>
+    <button onclick="setSourceAttribute( 'js'  )" > js    </button>
+    <button onclick="setSourceAttribute( 'html')" > html  </button>
+</fieldset>
+
     </template>
 </html-demo-element>
 

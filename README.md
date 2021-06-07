@@ -10,7 +10,7 @@ Dependent prism script located on unpkg.com CDN.
 ## Sample
 The code
 ```html
-<html-demo-element title="Error case">
+<html-demo-element legend="Error case">
     <slotted-element src="https://badUrl.heck">
         <p slot="loading" hidden>Loading... ⏳ </p>
         <p slot="error" hidden>Something went wrong. 😭 </p>
@@ -22,14 +22,14 @@ The code
 ```
 
 renders following content:
-![screenshot](screenshot.png?raw=true "Title")
+![screenshot](screenshot.png?raw=true "screenshot")
 
 # Use
 If do not want to use template, include the script BEFORE inner content is modified. I.e. immediately after HTML and before scripts with components.
 
 The use of `template` would defer the demo code injection after the source is rendered:
 ```html
-<html-demo-element title="Error case">
+<html-demo-element legend="Error case">
     <template><i>Candle 🕯️</i></template>
 </html-demo-element>
 ```
@@ -52,5 +52,22 @@ When you want to control where the source is located and where to render the cod
 
 # Live demo
 * https://unpkg.com/html-demo-element@1.0.3/demo/index.html
-* https://unpkg.com/html-demo-element@1.0.2/demo/advanced.html
+* https://unpkg.com/html-demo-element@1.0.3/demo/advanced.html
 * https://unpkg.com/slotted-element@1.0.2/demo/index.html
+
+# API
+## Slots
+* `source` - the source code node. If omitted it would be taken either from embedded `template` content or
+  from embedded into `html-demo-element` dom.
+* `text` - placeholder where the highlighted code would be rendered. If omitted the text would be rendered on 
+  top of template or top of `html-demo-element` content. 
+* `demo` - placeholder where the code would be moved into for displaying live DOM( for HTML type ). 
+  If omitted it would be placed beneath of `text` slot 
+* `legend` - placeholder where the value of `legend` attribute would be rendered as H3. 
+  When omitted, it would be placed on top.
+
+## Properties and attributes
+* `source` - the source code text. If the attribute is not defined, it would be initialized from `source` slot ^^
+* `type` - one of (prism js  supported languages)[https://prismjs.com/#supported-languages]. 
+  `html`, `css`, `js` imported by default. When omitted, assumed `html`.
+* `legend` - optional heading for `html-demo-element`  

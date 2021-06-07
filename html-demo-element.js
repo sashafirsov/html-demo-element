@@ -12,7 +12,11 @@ const createCss = ( text, el = document.createElement( "style" ) ) =>
 };
 createCss(`
     @import "https://unpkg.com/prismjs@1.23.0/themes/prism.css";
-    html-demo-element{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; padding: 1rem; margin: 1rem; }
+    html-demo-element{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; overflow: hidden; }
+    html-demo-element>*{ margin: 1rem; }
+    [slot="legend"]{ margin: 0; background-color: silver; }
+    [slot="legend"]>h3{ margin: 0; padding: 1rem; }
+    
 `);
 
 for( let el of document.querySelectorAll('html-demo-element') )
@@ -22,7 +26,8 @@ const propTypes =
 {   source: { type: String }
 ,   type: { type: String }
 ,   demo: { type: String }
-,   text: { type: HTMLElement }
+,   text: { type: String }
+,   legend: { type: String }
 };
 
     class
@@ -30,6 +35,17 @@ HtmlDemoElement extends HTMLElement
 {
     static get observedAttributes(){ return Object.keys(propTypes); }
     static get properties(){ return  propTypes; }
+
+    get source(){ return this._source }
+    set source( s )
+    {
+        const h = s.innerHTML;
+        if( h )
+            s = h;
+        this._source = s;
+        this.textSlot && this.render();
+        return s;
+    }
 
     attributeChangedCallback(name, oldValue, newValue)
     {
@@ -61,13 +77,14 @@ HtmlDemoElement extends HTMLElement
             return slot;
         };
 
-        if( !this.source )
-            this.source = template ? template.innerHTML : this.initialHTML;
+        if( !this._source )
+            this.source = template || this.initialHTML;
 
         const demoDom = [...this.childNodes];
         template || demoDom.map( el => el.remove() );
         this.demoSlot = createSlot('demo');
         this.textSlot = createSlot('text');
+        this.legendSlot = createSlot('legend');
         if( template )
             this.demoSlot.append( template.content.cloneNode(true) );
         else
@@ -76,9 +93,13 @@ HtmlDemoElement extends HTMLElement
     }
 
     render()
-    {   const type = this.type || 'html'
-        ,     html = Prism.highlight( this.source, Prism.languages[type], type );
-        this.textSlot.innerHTML = `<h3>${this.title||''}</h3><pre><code class="language-markup" >${html}</code></pre>`;
+    {   if( this.legend )
+            this.legendSlot.innerHTML = `<h3>${this.legend}</h3>`;
+
+        const type = this.type || 'html'
+        ,     html = Prism.highlight( this._source, Prism.languages[type], type );
+
+        this.textSlot.innerHTML = `<pre><code class="language-markup" >${html}</code></pre>`;
     }
 }
 window.customElements.define( 'html-demo-element', HtmlDemoElement);

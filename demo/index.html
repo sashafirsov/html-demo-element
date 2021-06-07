@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>html-demo-element demo</title>
+    <title>html-demo-element examples </title>
     <script type="module" src="../html-demo-element.js"></script>
 </head>
 <body>
-<h1> html-demo-element advanced use demo </h1>
+<h1> html-demo-element examples </h1>
 <p> Developer's documentation reside in <a href="https://github.com/sashafirsov/html-demo-element">Git repo</a>
 |   View this page <a href="https://github.com/sashafirsov/html-demo-element/demo/index.html">source</a>
 |   <a href="advanced.html">Advanced use</a>
@@ -27,10 +27,10 @@
 <div class="heart">💖</div>
 </html-demo-element>
 
-<h2> Title attribute </h2>
+<h2> Legend attribute </h2>
 
 <html-demo-element>
-    <html-demo-element title="with title attribute 🤗">
+    <html-demo-element legend="with legend attribute 🤗">
         Eating own dog food 🦴
     </html-demo-element>
 </html-demo-element>
@@ -45,9 +45,9 @@
     </fieldset>
 </html-demo-element>
 
-<h2> Slots: source, demo, text </h2>
+<h2> Slots: source, demo, text, legend </h2>
 
-<html-demo-element>
+<html-demo-element legend="slot='legend' by default on top, now on bottom">
     <template>ignored</template>
     <template slot="source"> <i>Croissant 🥐️ </i></template>
     <p><code>slot="source"</code> defines where to get code from </p>
@@ -57,7 +57,7 @@
 
     <p><code>slot="text"  </code> inject colored code text:      </p>
     <div slot="text"> replaced with colored code </div>
-
+    <div slot="legend"></div>
 </html-demo-element>
 
 <p>Happy coding!</p>
