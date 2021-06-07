@@ -50,7 +50,7 @@ When you want to control where the source is located and where to render the cod
 </html-demo-element>
 ```
 
-
 # Live demo
-https://unpkg.com/html-demo-element@1.0.2/demo/index.html
-https://unpkg.com/slotted-element@1.0.2/demo/index.html
+* https://unpkg.com/html-demo-element@1.0.3/demo/index.html
+* https://unpkg.com/html-demo-element@1.0.2/demo/advanced.html
+* https://unpkg.com/slotted-element@1.0.2/demo/index.html

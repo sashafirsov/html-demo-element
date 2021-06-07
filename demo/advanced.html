@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>html-demo-element demo</title>
+    <script type="module" src="../html-demo-element.js"></script>
+</head>
+<body>
+<h1> html-demo-element demo </h1>
+<p> Developer's documentation reside in <a href="https://github.com/sashafirsov/html-demo-element">Git repo</a>. </p>
+<p> View this page <a href="https://github.com/sashafirsov/html-demo-element/demo/index.html"> source </a> </p>
+<h2>Change attributes source, demo, text </h2>
+
+
+<style id="demo_css">
+    button{ padding: 1rem; border-radius: 0.5rem; }
+</style>
+<script id="demo_js">
+
+</script>
+
+<html-demo-element id="htmlDemoElement">
+
+    <button onclick="htmlDemoElement.source=demo_css"            > htmlDemoElement.source= css node </button>
+    <button onclick="htmlDemoElement.source=demo_css.textContent"> htmlDemoElement.source= css text </button>
+    <button onclick="htmlDemoElement.type=htmlDemoElement.title='css';
+                     htmlDemoElement.setAttribute('source',demo_css.textContent)"
+                                                                 > source attribute = css text      </button>
+</html-demo-element>
+
+
+<p>Happy coding!</p>
+</body>
+</html>

@@ -1,5 +1,8 @@
 import "https://unpkg.com/prismjs@1.23.0/components/prism-core.min.js";
 import "https://unpkg.com/prismjs@1.23.0/components/prism-markup.min.js";
+import "https://unpkg.com/prismjs@1.23.0/components/prism-css.min.js";
+import "https://unpkg.com/prismjs@1.23.0/components/prism-clike.min.js";
+import "https://unpkg.com/prismjs@1.23.0/components/prism-javascript.min.js";
 import "https://unpkg.com/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js";
 
 const createCss = ( text, el = document.createElement( "style" ) ) =>
@@ -15,35 +18,67 @@ createCss(`
 for( let el of document.querySelectorAll('html-demo-element') )
     el.initialHTML = el.innerHTML;
 
+const propTypes =
+{   source: { type: String }
+,   type: { type: String }
+,   demo: { type: String }
+,   text: { type: HTMLElement }
+};
+
     class
 HtmlDemoElement extends HTMLElement
 {
-    connectedCallback()
-    {   const      $ = x => this.querySelector(x)
-        , replaceDom = ( parent, child ) => { parent.innerHTML = ''; parent.append(child); }
-        ,   template = $('[slot="source"]') || $('template')
-        ,    srcText = template ? template.innerHTML :  this.initialHTML;
+    static get observedAttributes(){ return Object.keys(propTypes); }
+    static get properties(){ return  propTypes; }
 
-        const  html = Prism.highlight( srcText, Prism.languages.html, 'html' )
-        ,       pre = document.createElement( 'div' )
-        pre.innerHTML = `<h3>${this.title||''}</h3><pre><code class="language-markup" >${html}</code></pre>`;
-        if( template )
+    attributeChangedCallback(name, oldValue, newValue)
+    {
+        if( this.constructor.observedAttributes.includes(name)
+            && name in this.constructor.properties
+            && this[name] !== newValue )
         {
-            const textSlot = $('[slot="text"]')
-            ,          ref = template.nextElementSibling || template.parentElement.lastElementChild;
-            if( textSlot )
-                replaceDom( textSlot, pre );
-            else
-                template.parentElement.insertBefore( pre, ref );
+            this[name] = newValue;
+            this.render();
+        }
+    }
 
-            const demoDom = template.content.cloneNode( true )
-            ,        demo = $('[slot="demo"]')
-            if( demo )
-                replaceDom( demo, demoDom );
-            else
-                template.parentElement.insertBefore( demoDom, ref );
-        }else
-            this.insertBefore( pre, this.firstChild );
+
+    connectedCallback()
+    {
+        const      $ = x => this.querySelector(x)
+        ,   template = $( '[slot="source"]' ) || $( 'template' )
+        , createSlot = name =>
+        {   let slot = $(`[slot="${name}"]`);
+            if( slot )
+                return slot;
+            slot = document.createElement('div');
+            slot.setAttribute('slot',name);
+            if( template )
+            {   const ref = template.nextElementSibling || template.parentElement.lastElementChild;
+                template.parentElement.insertBefore( slot, ref );
+            }else
+                this.insertBefore( slot, this.firstChild );
+            return slot;
+        };
+
+        if( !this.source )
+            this.source = template ? template.innerHTML : this.initialHTML;
+
+        const demoDom = [...this.childNodes];
+        template || demoDom.map( el => el.remove() );
+        this.demoSlot = createSlot('demo');
+        this.textSlot = createSlot('text');
+        if( template )
+            this.demoSlot.append( template.content.cloneNode(true) );
+        else
+            demoDom.map( el=> this.demoSlot.append(el));
+        this.render();
+    }
+
+    render()
+    {   const type = this.type || 'html'
+        ,     html = Prism.highlight( this.source, Prism.languages[type], type );
+        this.textSlot.innerHTML = `<h3>${this.title||''}</h3><pre><code class="language-markup" >${html}</code></pre>`;
     }
 }
 window.customElements.define( 'html-demo-element', HtmlDemoElement);

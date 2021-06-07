@@ -4,20 +4,13 @@
     <meta charset="UTF-8">
     <title>html-demo-element demo</title>
     <script type="module" src="../html-demo-element.js"></script>
-    <script type="module" src="https://unpkg.com/slotted-element@1.0.2/slotted-element.js"></script>
-    <style>
-        slotted-element{ box-shadow: inset 0 0 2em #000000; }
-        slotted-element {
-            display: block;
-            background-color: rgba(255,255,255,0.8);
-            box-shadow: inset 0 0 2em #000000;
-        }
-    </style>
 </head>
 <body>
-<h1> html-demo-element demo </h1>
-<p> Developer's documentation reside in <a href="https://github.com/sashafirsov/html-demo-element">Git repo</a>. </p>
-<p> View this page <a href="https://github.com/sashafirsov/html-demo-element/demo/index.html"> source </a> </p>
+<h1> html-demo-element advanced use demo </h1>
+<p> Developer's documentation reside in <a href="https://github.com/sashafirsov/html-demo-element">Git repo</a>
+|   View this page <a href="https://github.com/sashafirsov/html-demo-element/demo/index.html">source</a>
+|   <a href="advanced.html">Advanced use</a>
+</p>
 <h2>in body</h2>
 
 <html-demo-element>
@@ -34,9 +27,9 @@
 <div class="heart">💖</div>
 </html-demo-element>
 
-<h2> With title attribute </h2>
+<h2> Title attribute </h2>
 
-<html-demo-element title="title attribute 🤗">
+<html-demo-element>
     <html-demo-element title="with title attribute 🤗">
         Eating own dog food 🦴
     </html-demo-element>
@@ -57,12 +50,12 @@
 <html-demo-element>
     <template>ignored</template>
     <template slot="source"> <i>Croissant 🥐️ </i></template>
-    <p><code>slot="source"</code> defines where to get code     </p>
+    <p><code>slot="source"</code> defines where to get code from </p>
 
-    <p><code>slot="demo"  </code> inject the html from source:  </p>
+    <p><code>slot="demo"  </code> inject the html from source:   </p>
     <div slot="demo"> replaced with tasty demo </div>
 
-    <p><code>slot="text"  </code> inject colored code text:     </p>
+    <p><code>slot="text"  </code> inject colored code text:      </p>
     <div slot="text"> replaced with colored code </div>
 
 </html-demo-element>
