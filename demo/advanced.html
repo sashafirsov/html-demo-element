@@ -16,16 +16,24 @@
     button{ padding: 1rem; border-radius: 0.5rem; }
 </style>
 <script id="demo_js">
-
+function setSourceAttribute( cssJsHtml )
+{
+    demoElement.type = demoElement.title = cssJsHtml;
+    demoElement.setAttribute('source', window['demo_'+cssJsHtml].innerHTML );
+}
 </script>
 
-<html-demo-element id="htmlDemoElement">
-
-    <button onclick="htmlDemoElement.source=demo_css"            > htmlDemoElement.source= css node </button>
-    <button onclick="htmlDemoElement.source=demo_css.textContent"> htmlDemoElement.source= css text </button>
-    <button onclick="htmlDemoElement.type=htmlDemoElement.title='css';
-                     htmlDemoElement.setAttribute('source',demo_css.textContent)"
-                                                                 > source attribute = css text      </button>
+<html-demo-element id="demoElement">
+    <template id="demo_html">
+        <button onclick="demoElement.source=demo_css"             > demoElement.source= css node </button>
+        <button onclick="demoElement.source=demo_css.textContent" > demoElement.source= css text </button>
+        <fieldset>
+            <legend> set source attribute from text of </legend>
+            <button onclick="setSourceAttribute( 'css' )"           > css   </button>
+            <button onclick="setSourceAttribute( 'js'  )"           > js    </button>
+            <button onclick="setSourceAttribute( 'html'  )"         > html  </button>
+        </fieldset>
+    </template>
 </html-demo-element>
 
 
