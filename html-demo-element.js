@@ -69,7 +69,7 @@ HtmlDemoElement extends HTMLElement
                 return slot;
             slot = document.createElement('div');
             slot.setAttribute('slot',name);
-            if( template )
+            if( name !== 'legend' && template )
             {   const ref = template.nextElementSibling || template.parentElement.lastElementChild;
                 template.parentElement.insertBefore( slot, ref );
             }else
@@ -82,8 +82,8 @@ HtmlDemoElement extends HTMLElement
 
         const demoDom = [...this.childNodes];
         template || demoDom.map( el => el.remove() );
-        this.demoSlot = createSlot('demo');
         this.textSlot = createSlot('text');
+        this.demoSlot = createSlot('demo');
         this.legendSlot = createSlot('legend');
         if( template )
             this.demoSlot.append( template.content.cloneNode(true) );
@@ -93,7 +93,7 @@ HtmlDemoElement extends HTMLElement
     }
 
     render()
-    {   if( this.legend )
+    {   if( this.legendSlot && this.legend )
             this.legendSlot.innerHTML = `<h3>${this.legend}</h3>`;
 
         const type = this.type || 'html'
