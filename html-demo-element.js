@@ -58,7 +58,6 @@ HtmlDemoElement extends HTMLElement
         }
     }
 
-
     connectedCallback()
     {
         const      $ = x => this.querySelector(x)
@@ -69,12 +68,10 @@ HtmlDemoElement extends HTMLElement
                 return slot;
             slot = document.createElement('div');
             slot.setAttribute('slot',name);
-            if( name !== 'legend' && template )
-            {   const ref = template.nextElementSibling || template.parentElement.lastElementChild;
-                template.parentElement.insertBefore( slot, ref );
-            }else
-                this.insertBefore( slot, this.firstChild );
-            return slot;
+            if( 'legend' === name )
+                return this.insertBefore( slot, this.firstChild );
+            return template ?    template.parentElement.insertBefore( slot, template )
+                            :    this.append( slot );
         };
 
         if( !this._source )
@@ -82,12 +79,13 @@ HtmlDemoElement extends HTMLElement
 
         const demoDom = [...this.childNodes];
         template || demoDom.map( el => el.remove() );
-        this.textSlot = createSlot('text');
-        this.demoSlot = createSlot('demo');
+        this.textSlot   = createSlot('text'  );
+        this.demoSlot   = createSlot('demo'  );
         this.legendSlot = createSlot('legend');
         if( template )
-            this.demoSlot.append( template.content.cloneNode(true) );
-        else
+        {   this.demoSlot.innerHTML = '';
+            this.demoSlot.append( template.content.cloneNode( true ) );
+        }else
             demoDom.map( el=> this.demoSlot.append(el));
         this.render();
     }

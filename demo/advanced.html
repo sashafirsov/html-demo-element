@@ -7,8 +7,9 @@
 </head>
 <body>
 <h1> html-demo-element advanced use </h1>
-<p> Developer's documentation reside in <a href="https://github.com/sashafirsov/html-demo-element">Git repo</a>. </p>
-<p> View this page <a href="https://github.com/sashafirsov/html-demo-element/demo/index.html"> source </a> </p>
+<p> <a href="index.html">🏠</a>
+    | Developer's documentation in <a href="https://github.com/sashafirsov/html-demo-element">Git repo</a>
+    | This page <a href="https://github.com/sashafirsov/html-demo-element/blob/main/demo/advanced.html"> source </a> </p>
 <p> Programmatic change <code>source</code>, <code>demo</code>, <code>text</code> property or attribute from text or
     DOM subtree.
     Click on button to see this demo CSS, JS, or HTML code highlighted by <a href="https://prismjs.com/">PrismJs</a>.
@@ -41,7 +42,8 @@ function setSourceByNode( cssJsHtml )
 }
 </script>
 
-<html-demo-element id="demoElement">
+<html-demo-element id="demoElement" legend="Programmatic content switch">
+    <div slot="demo"></div>
     <template id="sample_html">
 
 <fieldset>
