@@ -51,8 +51,8 @@ When you want to control where the source is located and where to render the cod
 ```
 
 # Live demo
-* https://unpkg.com/html-demo-element@1.0.4/demo/index.html
-* https://unpkg.com/html-demo-element@1.0.4/demo/advanced.html
+* https://unpkg.com/html-demo-element@1.0.5/demo/index.html
+* https://unpkg.com/html-demo-element@1.0.5/demo/advanced.html
 * https://unpkg.com/slotted-element@1.0.2/demo/index.html
 
 # API
