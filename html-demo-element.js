@@ -54,7 +54,7 @@ HtmlDemoElement extends HTMLElement
             && this[name] !== newValue )
         {
             this[name] = newValue;
-            this.render();
+            this.isInitialized && this.render();
         }
     }
 
@@ -71,7 +71,7 @@ HtmlDemoElement extends HTMLElement
             if( 'legend' === name )
                 return this.insertBefore( slot, this.firstChild );
             return template ?    template.parentElement.insertBefore( slot, template )
-                            :    this.append( slot );
+                            :    this.appendChild( slot );
         };
 
         if( !this._source )
@@ -87,6 +87,7 @@ HtmlDemoElement extends HTMLElement
             this.demoSlot.append( template.content.cloneNode( true ) );
         }else
             demoDom.map( el=> this.demoSlot.append(el));
+        this.isInitialized = 1;
         this.render();
     }
 
