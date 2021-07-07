@@ -1,6 +1,6 @@
 {
     "name": "html-demo-element",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Webcomponent inserts prism JS syntax colored HTML in html-demo-element before actual dom",
     "author": "Sasha Firsov",
     "license": "Apache-2.0",

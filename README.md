@@ -17,7 +17,7 @@ The code
     </slotted-element>
 </html-demo-element>
 
-<script type="module" src="https://unpkg.com/html-demo-element@1.0.6/html-demo-element.js"></script>
+<script type="module" src="https://unpkg.com/html-demo-element@1.0.7/html-demo-element.js"></script>
 <script type="module" src="https://unpkg.com/slotted-element@1.0.3/slotted-element.js"></script>
 ```
 
@@ -51,8 +51,8 @@ When you want to control where the source is located and where to render the cod
 ```
 
 # Live demo
-* https://unpkg.com/html-demo-element@1.0.6/demo/index.html
-* https://unpkg.com/html-demo-element@1.0.6/demo/advanced.html
+* https://unpkg.com/html-demo-element@1.0.7/demo/index.html
+* https://unpkg.com/html-demo-element@1.0.7/demo/advanced.html
 * https://unpkg.com/slotted-element@1.0.2/demo/index.html
 
 # API
@@ -68,6 +68,7 @@ When you want to control where the source is located and where to render the cod
 
 ## Properties and attributes
 * `source` - the source code text. If the attribute is not defined, it would be initialized from `source` slot ^^
-* `type` - one of [prism js  supported languages](https://prismjs.com/#supported-languages). 
+* `type` - one of [prism js  supported languages](https://prismjs.com/#supported-languages) or `auto`. 
   `html`, `css`, `js` imported by default. When omitted, assumed `html`.
 * `legend` - optional heading for `html-demo-element`  
+* `src` - optional url to retrieve the source. When `type` is omitted, it is detected from `content-type` or extension.
