@@ -47,6 +47,8 @@ HtmlDemoElement extends HTMLElement
         this.textSlot && this.render();
         return s;
     }
+    get src(){ this.getAttribute('src'); }
+    set src( url ){ this.setAttribute('src',url); }
 
     attributeChangedCallback(name, oldValue, newValue)
     {
@@ -54,16 +56,26 @@ HtmlDemoElement extends HTMLElement
             && name in this.constructor.properties
             && this[name] !== newValue )
         {
-            this[name] = newValue;
+            if( name !== 'src')
+                this[name] = newValue;
             this.isInitialized && this.render();
             if( 'src' === name )
             {
                 fetch(newValue).then( response =>
-                {   this.contentType = response.headers.get('content-type');
-                    const t2t = { json:'js', javascript:'js', html:'html',xml:'html',svg:'html'};
-                    for( let k in t2t )
-                    if( this.contentType.includes(k) )
-                        this.type = t2t[k];
+                {   if( !this.type || this.getAttribute('type') ==='auto' )
+                    {
+                        this.contentType = response.headers.get('content-type');
+                        const t2t = { json:'js', js:'js', javascript:'js',typescript:'js', html:'html',xml:'html',svg:'html',css:'css',scss:'css',less:'css'};
+                        let type;
+                        for( let k in t2t )
+                            if( this.contentType.includes(k) )
+                                type = t2t[k];
+                        if( !type ) // guess from extension
+                            for( let k in t2t )
+                                if( newValue.endsWith(k) )
+                                    type = t2t[k];
+                        this.type = type;
+                    }
                     return response.text();
                 }).then( text =>
                 {
@@ -111,10 +123,11 @@ HtmlDemoElement extends HTMLElement
     {   if( this.legendSlot && this.legend )
             this.legendSlot.innerHTML = `<h3>${this.legend}</h3>`;
 
-        const type = this.type || 'html'
-        ,     html = Prism.highlight( this._source, Prism.languages[type], type );
-
-        this.textSlot.innerHTML = `<pre><code class="language-markup" >${html}</code></pre>`;
+        if( this._source )
+        {   const type = this.type || 'html'
+            ,     html = Prism.highlight( this._source, Prism.languages[type], type );
+            this.textSlot.innerHTML = `<pre><code>${ html }</code></pre>`;
+        }
     }
 }
 window.customElements.define( 'html-demo-element', HtmlDemoElement);

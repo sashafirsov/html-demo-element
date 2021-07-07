@@ -17,12 +17,10 @@
 
 
 <style id="sample_css">
+    @import "demo.css";
     button{ padding: 1rem; border-radius: 0.5rem; }
     button:focus{ background-color: aquamarine; }
-    fieldset
-    {   display: inline-flex; border-top-left-radius: 1rem;
-        border: none; box-shadow: -4px 2px 4px silver;
-    }
+    html-demo-element fieldset{   display: inline-flex; }
 </style>
 <script id="sample_js">
 function setSourceAttribute( cssJsHtml )
@@ -67,6 +65,24 @@ function setSourceByNode( cssJsHtml )
 
     </template>
 </html-demo-element>
+
+
+<fieldset>
+    <legend> demoElement2.src = url </legend>
+    <button onclick="demoElement2.src='demo.css'"       > demo.css        </button>
+    <button onclick="demoElement2.src='dev-server.cjs'" > dev-server.cjs  </button>
+    <button onclick="demoElement2.src='advanced.html'"  > advanced.html   </button>
+    <html-demo-element id="demoElement2" src="demo.css" type="auto"></html-demo-element>
+</fieldset>
+
+<fieldset>
+    <legend> demoElement3.setAttribute('src', url) </legend>
+    <button onclick="demoElement3.setAttribute('src','demo.css')"       > demo.css        </button>
+    <button onclick="demoElement3.setAttribute('src','dev-server.cjs')" > dev-server.cjs  </button>
+    <button onclick="demoElement3.setAttribute('src','advanced.html')"  > advanced.html   </button>
+    <html-demo-element id="demoElement3" src="demo.css" type="auto"></html-demo-element>
+</fieldset>
+
 
 
 <p>Happy coding!</p>
