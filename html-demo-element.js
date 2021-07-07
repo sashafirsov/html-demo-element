@@ -1,9 +1,9 @@
-import "https://unpkg.com/prismjs@1.23.0/components/prism-core.min.js";
-import "https://unpkg.com/prismjs@1.23.0/components/prism-markup.min.js";
-import "https://unpkg.com/prismjs@1.23.0/components/prism-css.min.js";
-import "https://unpkg.com/prismjs@1.23.0/components/prism-clike.min.js";
-import "https://unpkg.com/prismjs@1.23.0/components/prism-javascript.min.js";
-import "https://unpkg.com/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js";
+import "https://unpkg.com/prismjs@1.24.1/components/prism-core.min.js";
+import "https://unpkg.com/prismjs@1.24.1/components/prism-markup.min.js";
+import "https://unpkg.com/prismjs@1.24.1/components/prism-css.min.js";
+import "https://unpkg.com/prismjs@1.24.1/components/prism-clike.min.js";
+import "https://unpkg.com/prismjs@1.24.1/components/prism-javascript.min.js";
+import "https://unpkg.com/prismjs@1.24.1/plugins/autoloader/prism-autoloader.min.js";
 
 const createCss = ( text, el = document.createElement( "style" ) ) =>
 {   el.type = "text/css";
@@ -11,7 +11,7 @@ const createCss = ( text, el = document.createElement( "style" ) ) =>
     document.head.appendChild( el );
 };
 createCss(`
-    @import "https://unpkg.com/prismjs@1.23.0/themes/prism.css";
+    @import "https://unpkg.com/prismjs@1.24.1/themes/prism.css";
     html-demo-element{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; overflow: hidden; }
     html-demo-element>*{ margin: 1rem; }
     [slot="legend"]{ margin: 0; background-color: silver; }
@@ -25,6 +25,7 @@ for( let el of document.querySelectorAll('html-demo-element') )
 const propTypes =
 {   source: { type: String }
 ,   type: { type: String }
+,   src : { type: String }
 ,   demo: { type: String }
 ,   text: { type: String }
 ,   legend: { type: String }
@@ -55,6 +56,21 @@ HtmlDemoElement extends HTMLElement
         {
             this[name] = newValue;
             this.isInitialized && this.render();
+            if( 'src' === name )
+            {
+                fetch(newValue).then( response =>
+                {   this.contentType = response.headers.get('content-type');
+                    const t2t = { json:'js', javascript:'js', html:'html',xml:'html',svg:'html'};
+                    for( let k in t2t )
+                    if( this.contentType.includes(k) )
+                        this.type = t2t[k];
+                    return response.text();
+                }).then( text =>
+                {
+                    this.source = text;
+                    this.isInitialized && this.render();
+                });
+            }
         }
     }
 
