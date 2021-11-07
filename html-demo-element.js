@@ -1,9 +1,9 @@
-import "https://unpkg.com/prismjs@1.24.1/components/prism-core.min.js";
-import "https://unpkg.com/prismjs@1.24.1/components/prism-markup.min.js";
-import "https://unpkg.com/prismjs@1.24.1/components/prism-css.min.js";
-import "https://unpkg.com/prismjs@1.24.1/components/prism-clike.min.js";
-import "https://unpkg.com/prismjs@1.24.1/components/prism-javascript.min.js";
-import "https://unpkg.com/prismjs@1.24.1/plugins/autoloader/prism-autoloader.min.js";
+import "https://unpkg.com/prismjs@1.25.0/components/prism-core.min.js";
+import "https://unpkg.com/prismjs@1.25.0/components/prism-markup.min.js";
+import "https://unpkg.com/prismjs@1.25.0/components/prism-css.min.js";
+import "https://unpkg.com/prismjs@1.25.0/components/prism-clike.min.js";
+import "https://unpkg.com/prismjs@1.25.0/components/prism-javascript.min.js";
+import "https://unpkg.com/prismjs@1.25.0/plugins/autoloader/prism-autoloader.min.js";
 
 const createCss = ( text, el = document.createElement( "style" ) ) =>
 {   el.type = "text/css";
@@ -11,24 +11,27 @@ const createCss = ( text, el = document.createElement( "style" ) ) =>
     document.head.appendChild( el );
 };
 createCss(`
-    @import "https://unpkg.com/prismjs@1.24.1/themes/prism.css";
+    @import "https://unpkg.com/prismjs@1.25.0/themes/prism.css";
     html-demo-element{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; overflow: hidden; }
     html-demo-element>*{ margin: 1rem; }
-    [slot="legend"]{ margin: 0; background-color: silver; }
+    [slot="legend"],[slot="description"]{ margin: 0; background-color: silver; }
     [slot="legend"]>h3{ margin: 0; padding: 1rem; }
-    
+    [slot="description"] dd { padding-top: 1rem; }
+    [slot="legend"]+[slot="description"] dd { padding-bottom: 1rem; padding-top: 0; }
 `);
 
 for( let el of document.querySelectorAll('html-demo-element') )
     el.initialHTML = el.innerHTML;
 
-const propTypes =
-{   source: { type: String }
-,   type: { type: String }
-,   src : { type: String }
-,   demo: { type: String }
-,   text: { type: String }
-,   legend: { type: String }
+const   STR = { type: String }
+,       propTypes =
+{   source      : STR
+,   type        : STR
+,   src         : STR
+,   demo        : STR
+,   text        : STR
+,   legend      : STR
+,   description : STR
 };
 
     class
@@ -96,7 +99,7 @@ HtmlDemoElement extends HTMLElement
                 return slot;
             slot = document.createElement('div');
             slot.setAttribute('slot',name);
-            if( 'legend' === name )
+            if( 'legend description'.includes(name) )
                 return this.insertBefore( slot, this.firstChild );
             return template ?    template.parentElement.insertBefore( slot, template )
                             :    this.appendChild( slot );
@@ -107,9 +110,10 @@ HtmlDemoElement extends HTMLElement
 
         const demoDom = [...this.childNodes];
         template || demoDom.map( el => el.remove() );
-        this.textSlot   = createSlot('text'  );
-        this.demoSlot   = createSlot('demo'  );
-        this.legendSlot = createSlot('legend');
+        this.textSlot       = createSlot('text'  );
+        this.demoSlot       = createSlot('demo'  );
+        this.descriptionSlot= createSlot('description');
+        this.legendSlot     = createSlot('legend');
         if( template )
         {   this.demoSlot.innerHTML = '';
             this.demoSlot.append( template.content.cloneNode( true ) );
@@ -122,6 +126,8 @@ HtmlDemoElement extends HTMLElement
     render()
     {   if( this.legendSlot && this.legend )
             this.legendSlot.innerHTML = `<h3>${this.legend}</h3>`;
+        if( this.descriptionSlot && this.description )
+            this.descriptionSlot.innerHTML = `<dd>${this.description}</dd>`;
 
         if( this._source )
         {   const type = this.type || 'html'

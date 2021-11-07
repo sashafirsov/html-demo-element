@@ -1,11 +1,10 @@
 # html-demo-element
 inserts [prism JS syntax colored](https://prismjs.com/) HTML in demo-element before actual dom
 
-[![npm package](https://nodei.co/npm/html-demo-element.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/html-demo-element/)
+[![NPM version][npm-image]][npm-url] 
+[![Published on webcomponents.org][wc-image]][wc-url] 
 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/html-demo-element)
-
-Dependent prism script located on unpkg.com CDN.
+Dependent prism script is located on unpkg.com CDN.
 
 ## Sample
 The code
@@ -17,7 +16,7 @@ The code
     </slotted-element>
 </html-demo-element>
 
-<script type="module" src="https://unpkg.com/html-demo-element@1.0.7/html-demo-element.js"></script>
+<script type="module" src="https://unpkg.com/html-demo-element@1.0.8/html-demo-element.js"></script>
 <script type="module" src="https://unpkg.com/slotted-element@1.0.3/slotted-element.js"></script>
 ```
 
@@ -51,9 +50,9 @@ When you want to control where the source is located and where to render the cod
 ```
 
 # Live demo
-* https://unpkg.com/html-demo-element@1.0.7/demo/index.html
-* https://unpkg.com/html-demo-element@1.0.7/demo/advanced.html
-* https://unpkg.com/slotted-element@1.0.2/demo/index.html
+* https://unpkg.com/html-demo-element@1.0.8/demo/index.html
+* https://unpkg.com/html-demo-element@1.0.8/demo/advanced.html
+* https://unpkg.com/slotted-element@1.0.3/demo/index.html
 
 # API
 ## Slots
@@ -72,3 +71,8 @@ When you want to control where the source is located and where to render the cod
   `html`, `css`, `js` imported by default. When omitted, assumed `html`.
 * `legend` - optional heading for `html-demo-element`  
 * `src` - optional url to retrieve the source. When `type` is omitted, it is detected from `content-type` or extension.
+
+[npm-image]:      https://img.shields.io/npm/v/html-demo-element.svg
+[npm-url]:        https://npmjs.org/package/html-demo-element
+[wc-image]:       https://img.shields.io/badge/webcomponents.org-published-blue.svg
+[wc-url]:         https://www.webcomponents.org/element/html-demo-element

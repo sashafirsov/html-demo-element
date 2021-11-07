@@ -32,7 +32,7 @@ http.createServer(function (request, response) {
     var contentType = ext2type[extname] || 'text/html'
     fs.readFile(filePath, function(error, content)
     {   if (error)
-        {   if( error.code == 'ENOENT')
+        {   if( error.code === 'ENOENT')
             {       response.writeHead(404, { 'Content-Type': contentType });
                     response.end(filePath+" not found");
             }else
@@ -47,4 +47,4 @@ http.createServer(function (request, response) {
     });
 
 }).listen(8080);
-console.log('Server running. Demo at http://127.0.0.1:8080/demo/index.html');
+console.log('Server is running demo at http://127.0.0.1:8080/demo/index.html');

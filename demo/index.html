@@ -20,10 +20,15 @@
 <div class="heart">💖</div>
 </html-demo-element>
 
-<h2> Legend attribute </h2>
+<h2> Legend and description attribute </h2>
 
 <html-demo-element>
-    <html-demo-element legend="with legend attribute 🤗">
+    <html-demo-element
+        legend="with legend attribute 🤗"
+        description="👓
+                Description will be kept next to legend
+                but less emphasized "
+    >
         Eating own dog food 🦴
     </html-demo-element>
 </html-demo-element>
@@ -40,7 +45,9 @@
 
 <h2> Slots: source, demo, text, legend </h2>
 
-<html-demo-element legend="slot='legend' by default on top, now on bottom">
+<html-demo-element legend="slot='legend' by default on top, now on bottom"
+    description="slot='description' by default bellow the legend in heading, now above"
+>
     <template>ignored</template>
     <template slot="source"> <i>Croissant 🥐️ </i></template>
     <p><code>slot="source"</code> defines where to get code from </p>
@@ -50,6 +57,7 @@
 
     <p><code>slot="text"  </code> inject colored code text:      </p>
     <div slot="text"> replaced with colored code </div>
+    <div slot="description"></div>
     <div slot="legend"></div>
 </html-demo-element>
 
