@@ -45,7 +45,9 @@ When you want to control where the source is located and where to render the cod
 
     <p><code>slot="text"  </code> inject colored code text:     </p>
     <div slot="text"> replaced with colored code </div>
-
+    
+    <div slot="description"></div>
+    <div slot="legend"></div>
 </html-demo-element>
 ```
 
@@ -64,12 +66,15 @@ When you want to control where the source is located and where to render the cod
   If omitted it would be placed beneath of `text` slot 
 * `legend` - placeholder where the value of `legend` attribute would be rendered as H3. 
   When omitted, it would be placed on top.
+* `description` - placeholder where the value of `description` attribute would be rendered as dd. 
+  When omitted, it would be placed on beneath of description.
 
 ## Properties and attributes
 * `source` - the source code text. If the attribute is not defined, it would be initialized from `source` slot ^^
 * `type` - one of [prism js  supported languages](https://prismjs.com/#supported-languages) or `auto`. 
   `html`, `css`, `js` imported by default. When omitted, assumed `html`.
 * `legend` - optional heading for `html-demo-element`  
+* `description` - additional text in title, bellow the legend
 * `src` - optional url to retrieve the source. When `type` is omitted, it is detected from `content-type` or extension.
 
 [npm-image]:      https://img.shields.io/npm/v/html-demo-element.svg
