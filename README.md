@@ -1,6 +1,5 @@
 # html-demo-element
-inserts [prism JS syntax colored](https://prismjs.com/) HTML in demo-element before actual dom
-
+web component inserts [prism JS syntax colored](https://prismjs.com/) HTML in demo-element before rendered UI for this HTML
 [![NPM version][npm-image]][npm-url] 
 [![Published on webcomponents.org][wc-image]][wc-url] 
 
