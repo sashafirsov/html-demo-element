@@ -45,7 +45,7 @@ HtmlDemoElement extends HTMLElement
     static get observedAttributes(){ return Object.keys(propTypes); }
     static get properties(){ return  propTypes; }
 
-    static version = '1.0.9';
+    static version = '1.0.10';
 
     get source(){ return this._source }
     set source( s )
@@ -113,7 +113,7 @@ HtmlDemoElement extends HTMLElement
         };
 
         if( !this._source )
-            this.source = template || this.initialHTML;
+            this.source = template || this.initialHTML || this.innerHTML;
 
         const demoDom = [...this.childNodes];
         template || demoDom.map( el => el.remove() );

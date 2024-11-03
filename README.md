@@ -15,7 +15,7 @@ The code
     </slotted-element>
 </html-demo-element>
 
-<script type="module" src="https://unpkg.com/html-demo-element@1.0.9/html-demo-element.js"></script>
+<script type="module" src="https://unpkg.com/html-demo-element@1.0.10/html-demo-element.js"></script>
 <script type="module" src="https://unpkg.com/slotted-element@1.0.3/slotted-element.js"></script>
 ```
 
@@ -51,8 +51,8 @@ When you want to control where the source is located and where to render the cod
 ```
 
 # Live demo
-* https://unpkg.com/html-demo-element@1.0.9/demo/index.html
-* https://unpkg.com/html-demo-element@1.0.9/demo/advanced.html
+* https://unpkg.com/html-demo-element@1.0.10/demo/index.html
+* https://unpkg.com/html-demo-element@1.0.10/demo/advanced.html
 * https://unpkg.com/slotted-element@1.0.3/demo/index.html
 
 # API
