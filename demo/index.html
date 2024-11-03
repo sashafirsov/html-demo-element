@@ -45,9 +45,7 @@
 
 <h2> Slots: source, demo, text, legend </h2>
 
-<html-demo-element legend="slot='legend' by default on top, now on bottom"
-    description="slot='description' by default bellow the legend in heading, now above"
->
+<html-demo-element legend="slot='legend' by default on top, now on bottom">
     <template>ignored</template>
     <template slot="source"> <i>Croissant 🥐️ </i></template>
     <p><code>slot="source"</code> defines where to get code from </p>
@@ -57,7 +55,7 @@
 
     <p><code>slot="text"  </code> inject colored code text:      </p>
     <div slot="text"> replaced with colored code </div>
-    <div slot="description"></div>
+    <div slot="description"><b>slot='description'</b> by default bellow the legend in heading, now above</div>
     <div slot="legend"></div>
 </html-demo-element>
 

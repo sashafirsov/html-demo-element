@@ -1,9 +1,9 @@
-import "https://unpkg.com/prismjs@1.25.0/components/prism-core.min.js";
-import "https://unpkg.com/prismjs@1.25.0/components/prism-markup.min.js";
-import "https://unpkg.com/prismjs@1.25.0/components/prism-css.min.js";
-import "https://unpkg.com/prismjs@1.25.0/components/prism-clike.min.js";
-import "https://unpkg.com/prismjs@1.25.0/components/prism-javascript.min.js";
-import "https://unpkg.com/prismjs@1.25.0/plugins/autoloader/prism-autoloader.min.js";
+import "https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js";
+import "https://unpkg.com/prismjs@1.29.0/components/prism-markup.min.js";
+import "https://unpkg.com/prismjs@1.29.0/components/prism-css.min.js";
+import "https://unpkg.com/prismjs@1.29.0/components/prism-clike.min.js";
+import "https://unpkg.com/prismjs@1.29.0/components/prism-javascript.min.js";
+import "https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js";
 
 const createCss = ( text, el = document.createElement( "style" ) ) =>
 {   el.type = "text/css";
@@ -11,13 +11,18 @@ const createCss = ( text, el = document.createElement( "style" ) ) =>
     document.head.appendChild( el );
 };
 createCss(`
-    @import "https://unpkg.com/prismjs@1.25.0/themes/prism.css";
+    @import "https://unpkg.com/prismjs@1.29.0/themes/prism.css";
     html-demo-element{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; overflow: hidden; }
     html-demo-element>*{ margin: 1rem; }
     [slot="legend"],[slot="description"]{ margin: 0; background-color: silver; }
     [slot="legend"]>h3{ margin: 0; padding: 1rem; }
-    [slot="description"] dd { padding-top: 1rem; }
-    [slot="legend"]+[slot="description"] dd { padding-bottom: 1rem; padding-top: 0; }
+    [slot="legend"]{ border-radius: 1rem 1rem 0 0; }
+    [slot="description"]+
+    [slot="legend"]{ border-radius: 0 0 1rem 1rem; }
+    [slot="description"]{ padding: 0 1rem 1rem 1rem; dd{ padding: 0 !important;margin: 0; }}
+    [slot="description"]:has(+[slot="legend"]) { padding-bottom: 0; padding-top: 1rem; }
+
+    pre{overflow:auto;}
 `);
 
 for( let el of document.querySelectorAll('html-demo-element') )
@@ -40,10 +45,12 @@ HtmlDemoElement extends HTMLElement
     static get observedAttributes(){ return Object.keys(propTypes); }
     static get properties(){ return  propTypes; }
 
+    static version = '1.0.9';
+
     get source(){ return this._source }
     set source( s )
     {
-        const h = s.innerHTML;
+        const h = s?.innerHTML ?? s?.data;
         if( h )
             s = h;
         this._source = s;
@@ -136,4 +143,5 @@ HtmlDemoElement extends HTMLElement
         }
     }
 }
-window.customElements.define( 'html-demo-element', HtmlDemoElement);
+if( !window.customElements.get('html-demo-element') )
+    window.customElements.define( 'html-demo-element', HtmlDemoElement);

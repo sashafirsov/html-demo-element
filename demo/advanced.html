@@ -18,9 +18,18 @@
 
 <style id="sample_css">
     @import "demo.css";
-    button{ padding: 1rem; border-radius: 0.5rem; }
-    button:focus{ background-color: aquamarine; }
-    html-demo-element fieldset{   display: inline-flex; }
+    body{ display: flex; gap: 1rem; flex-direction: column;}
+    button
+    {   padding: 0.5rem; border-radius: 1rem 1rem 0 0; border: none; min-width: 4rem;
+        &:focus{ background-color: aquamarine; z-index: 1; }
+    }
+    fieldset{ padding-bottom: 0; }
+    html-demo-element{
+        border: none;
+        &>*{margin-left: 0; }
+        fieldset{   display: inline-flex; }
+    }
+    [slot="description"]:empty{ display: none; }
 </style>
 <script id="sample_js">
 function setSourceAttribute( cssJsHtml )
