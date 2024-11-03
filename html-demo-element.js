@@ -5,25 +5,12 @@ import "https://unpkg.com/prismjs@1.29.0/components/prism-clike.min.js";
 import "https://unpkg.com/prismjs@1.29.0/components/prism-javascript.min.js";
 import "https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js";
 
-const createCss = ( text, el = document.createElement( "style" ) ) =>
-{   el.type = "text/css";
+const createCss = ( text, parent ) =>
+{ const el = document.createElement( "style" ) ;
+    el.type = "text/css";
     el.innerText = text;
-    document.head.appendChild( el );
+    parent.appendChild( el );
 };
-createCss(`
-    @import "https://unpkg.com/prismjs@1.29.0/themes/prism.css";
-    html-demo-element{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; overflow: hidden; }
-    html-demo-element>*{ margin: 1rem; }
-    [slot="legend"],[slot="description"]{ margin: 0; background-color: silver; }
-    [slot="legend"]>h3{ margin: 0; padding: 1rem; }
-    [slot="legend"]{ border-radius: 1rem 1rem 0 0; }
-    [slot="description"]+
-    [slot="legend"]{ border-radius: 0 0 1rem 1rem; }
-    [slot="description"]{ padding: 0 1rem 1rem 1rem; dd{ padding: 0 !important;margin: 0; }}
-    [slot="description"]:has(+[slot="legend"]) { padding-bottom: 0; padding-top: 1rem; }
-
-    pre{overflow:auto;}
-`);
 
 for( let el of document.querySelectorAll('html-demo-element') )
     el.initialHTML = el.innerHTML;
@@ -45,7 +32,7 @@ HtmlDemoElement extends HTMLElement
     static get observedAttributes(){ return Object.keys(propTypes); }
     static get properties(){ return  propTypes; }
 
-    static version = '1.0.10';
+    static version = '1.0.11';
 
     get source(){ return this._source }
     set source( s )
@@ -127,6 +114,21 @@ HtmlDemoElement extends HTMLElement
         }else
             demoDom.map( el=> this.demoSlot.append(el));
         this.isInitialized = 1;
+        createCss(`
+            @import "https://unpkg.com/prismjs@1.29.0/themes/prism.css";
+            html-demo-element{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; overflow: hidden; }
+            html-demo-element>*{ margin: 1rem; }
+            [slot="legend"],[slot="description"]{ margin: 0; background-color: silver; }
+            [slot="legend"]>h3{ margin: 0; padding: 1rem; }
+            [slot="legend"]{ border-radius: 1rem 1rem 0 0; }
+            [slot="description"]+
+            [slot="legend"]{ border-radius: 0 0 1rem 1rem; }
+            [slot="description"]{ padding: 0 1rem 1rem 1rem; dd{ padding: 0 !important;margin: 0; }}
+            [slot="description"]:has(+[slot="legend"]) { padding-bottom: 0; padding-top: 1rem; }
+        
+            pre{overflow:auto;}
+        `, this);
+
         this.render();
     }
 
