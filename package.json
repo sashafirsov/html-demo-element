@@ -23,8 +23,7 @@
         "start": "node demo/dev-server.cjs"
     },
     "dependencies": {
-    },
-    "devDependencies": {
+        "prismjs": "1.29.0"
     },
     "funding": {
         "type": "patreon",

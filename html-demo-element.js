@@ -1,12 +1,36 @@
-import "https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js";
-import "https://unpkg.com/prismjs@1.29.0/components/prism-markup.min.js";
-import "https://unpkg.com/prismjs@1.29.0/components/prism-css.min.js";
-import "https://unpkg.com/prismjs@1.29.0/components/prism-clike.min.js";
-import "https://unpkg.com/prismjs@1.29.0/components/prism-javascript.min.js";
-import "https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js";
+const packagesRoot = await( async()=>
+{
+    if( window.Prism )
+        return '';
+
+    const r = import.meta.resolve('prismjs/prism.js').split('/');
+    r.pop();
+    const root = r.join('/');
+    try
+    {   await Promise.all(
+        [   import ("prismjs/components/prism-core.min.js")
+        ,   import ("prismjs/components/prism-markup.min.js")
+        ,   import ("prismjs/components/prism-css.min.js")
+        ,   import ("prismjs/components/prism-clike.min.js")
+        ,   import ("prismjs/components/prism-javascript.min.js")
+        ,   import ("prismjs/plugins/autoloader/prism-autoloader.min.js")
+        ]);
+    }catch(err)
+    {   console.log( 'prismjs module is required for html-demo-element and not available via importmaps or build. Trying semver CDN convention' );
+        await Promise.all(
+        [   import ("../prismjs/components/prism-core.min.js")
+        ,   import ("../prismjs/components/prism-markup.min.js")
+        ,   import ("../prismjs/components/prism-css.min.js")
+        ,   import ("../prismjs/components/prism-clike.min.js")
+        ,   import ("../prismjs/components/prism-javascript.min.js")
+        ,   import ("../prismjs/plugins/autoloader/prism-autoloader.min.js")
+        ]);
+    }
+    return root
+})();
 
 const createCss = ( text, parent ) =>
-{ const el = document.createElement( "style" ) ;
+{   const el = document.createElement( "style" ) ;
     el.type = "text/css";
     el.innerText = text;
     parent.appendChild( el );
@@ -115,7 +139,7 @@ HtmlDemoElement extends HTMLElement
             demoDom.map( el=> this.demoSlot.append(el));
         this.isInitialized = 1;
         createCss(`
-            @import "https://unpkg.com/prismjs@1.29.0/themes/prism.css";
+            @import "${packagesRoot}/prismjs/themes/prism.css";
             html-demo-element{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; overflow: hidden; }
             html-demo-element>*{ margin: 1rem; }
             [slot="legend"],[slot="description"]{ margin: 0; background-color: silver; }
