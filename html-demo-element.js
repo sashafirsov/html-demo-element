@@ -116,17 +116,29 @@ HtmlDemoElement extends HTMLElement
         this.isInitialized = 1;
         createCss(`
             @import "https://unpkg.com/prismjs@1.29.0/themes/prism.css";
-            html-demo-element{ display: block; border: blueviolet dashed 1px; border-radius: 1rem; overflow: hidden; }
-            html-demo-element>*{ margin: 1rem; }
+            html-demo-element
+            {   display: flex; flex-direction:column;
+                border: blueviolet dashed 1px; border-radius: 1rem;  
+                &>*{ margin: 1rem; }            
+                &+*:first-element,
+                &+*:last-element{  overflow: hidden; }
+            }
+            html-demo-element>:first-child,
+            html-demo-element>:first-child:empty+*
+                { border-radius: 1rem 1rem 0 0; }
+
+            html-demo-element>:last-child,
+            html-demo-element>*:nth-last-child(2)
+                { border-radius: 0 0 1rem 1rem; }
+                
             [slot="legend"],[slot="description"]{ margin: 0; background-color: silver; }
             [slot="legend"]>h3{ margin: 0; padding: 1rem; }
-            [slot="legend"]{ border-radius: 1rem 1rem 0 0; }
-            [slot="description"]+
-            [slot="legend"]{ border-radius: 0 0 1rem 1rem; }
+            
+            [slot="legend"]:empty, [slot="description"]:empty{ display:none; }
             [slot="description"]{ padding: 0 1rem 1rem 1rem; dd{ padding: 0 !important;margin: 0; }}
             [slot="description"]:has(+[slot="legend"]) { padding-bottom: 0; padding-top: 1rem; }
         
-            pre{overflow:auto;}
+            pre{ overflow: auto; }
         `, this);
 
         this.render();
